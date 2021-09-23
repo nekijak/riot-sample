@@ -1,0 +1,124 @@
+<my-okaimono>
+  <table>
+    <caption>お買い物リスト</caption>
+    <thead>
+      <tr>
+        <th>品名</th>
+        <th>数量</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ item in state.item_list }" onclick="{ () => check(item) }" class="{ item.done ? 'done' : '' }">
+        <td>{ item.name }</td>
+        <td>{ item.qty }</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="text" id="new_name" placeholder="品名" value="">
+          <input type="text" id="new_qty" placeholder="数量" value="">
+          <input type="button" value="追加" onclick="{ add }">
+        </td>
+      <tr>
+    </tbody>
+    <tfoot if="{ state.errmsg }">
+      <tr>
+        <th colspan="2" class="errmsg">{ state.errmsg }</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <style>
+    table {
+      margin: 30px auto;
+      width: 300px;
+    }
+    table,th,td {
+      border: 1px solid #303030;
+      border-collapse: collapse;
+    }
+    td:not([colspan]) {
+      cursor: pointer;
+    }
+    td:nth-child(2) {
+      text-align: right;
+    }
+    td[colspan] {
+      text-align: center;
+    }
+    #new_name {
+      width: 150px;
+      margin-right: 10px;
+    }
+    #new_qty {
+      width: 50px;
+      margin-right: 10px;
+    }
+    .done {
+      background-color: #dadada;
+      text-decoration: line-through;
+    }
+    .errmsg {
+      color: red;
+    }
+  </style>
+
+  <script>
+    export default {
+      state: {
+        "item_list": [
+          { "name": "玉ねぎ", "qty": "2玉" },
+          { "name": "ニンニク", "qty": "1個" },
+          { "name": "とり手羽元", "qty": "10本" },
+          { "name": "トマト缶", "qty": "1缶", "done": true },
+          { "name": "レタス", "qty": "1玉" },
+          { "name": "トマト", "qty": "1個" },
+          { "name": "ほうれん草", "qty": "2束" },
+          { "name": "たまご", "qty": "2個" }
+        ]
+      },
+
+      // 品名追加
+      add(e) {
+        // 入力エリアの要素を選択
+        const new_name = this.$("#new_name");
+        const new_qty = this.$("#new_qty");
+
+        // 入力されていない場合
+        if (!new_name.value || !new_qty.value) {
+          this.state.errmsg = "品名または数量は必須入力です";
+
+        // すでに登録されている場合
+        } else if (this.state.item_list.some(item => item.name == new_name.value)) {
+          this.state.errmsg = "すでに登録されている品名です";
+
+        // 正常入力
+        } else {
+          // リストに登録
+          this.state.item_list.push({ "name": new_name.value, "qty": new_qty.value });
+          // エラーメッセージと入力エリアをクリア
+          this.state.errmsg = "";
+          new_name.value = "";
+          new_qty.value = "";
+        }
+
+        // 画面更新
+        this.update();
+      },
+
+      // 品名チェック
+      check(check_item) {
+        // すでにチェック済の場合は削除するか確認する
+        if (check_item.done && window.confirm(`${ check_item.name } を削除しますか？`)) {
+          // 項目を削除
+          this.state.item_list.splice(this.state.item_list.findIndex(item => item.name == check_item.name), 1);
+        } else {
+          // チェック済を解除
+          check_item.done = !check_item.done;
+        }
+
+        // 画面更新
+        this.update();
+      }
+    }
+  </script>
+</my-okaimono>

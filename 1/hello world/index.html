@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Riot Hello Wolrd</title>
+    <script src="https://cdn.jsdelivr.net/npm/riot@6.0.4/riot+compiler.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", e => {
+        // テンプレート定義を取得
+        const hello_template = document.getElementById("my-hello").innerHTML;
+
+        // テンプレート定義をコンパイルし、コードを取得
+        const { code } = riot.compileFromString(hello_template);
+
+        // riot コンポーネントをランタイム生成
+        //   1: riotjs用テンプレートコード
+        //   2: マウントするタグ名
+        //   3: 設定するscriptファイル名
+        riot.inject(code, "my-hello", "my-hello");
+
+        // カスタムタグにマウント
+        //   1: マウントするカスタムタグ名
+        //   2: タグに渡すオブジェクト(props)
+        riot.mount("my-hello", {
+          message: "Hello World!"
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <template id="my-hello">
+      <my-hello>
+        <p>{ props.message }</p>
+      </my-hello>
+    </template>
+
+    <my-hello></my-hello>
+  </body>
+</html>

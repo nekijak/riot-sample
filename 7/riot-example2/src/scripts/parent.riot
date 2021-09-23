@@ -1,0 +1,19 @@
+<my-parent>
+  <div>
+    I am parent: { state.parent }
+    <my-child1></my-child1>
+    <my-child2></my-child2>
+  </div>
+
+  <script>
+    export default {
+      state: {
+        "parent": 123,
+      },
+
+      parent_function() {
+        return state.parent;
+      }
+    }
+  </script>
+</my-parent>

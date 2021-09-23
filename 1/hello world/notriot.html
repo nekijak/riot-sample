@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Not Riot Hello Wolrd</title>
+    <script>
+      window.addEventListener("DOMContentLoaded", e => {
+        // HTMLに渡すパラメータ
+        const props = {
+          message: "Hello World!"
+        };
+
+        // HTMLを構築
+        const hello_html = `<p>${ props.message }</p>`;
+
+        // HTMLを挿入
+        document.getElementById("my-hello").innerHTML = hello_html;
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="my-hello"></div>
+  </body>
+</html>

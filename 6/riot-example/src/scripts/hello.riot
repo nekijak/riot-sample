@@ -1,0 +1,267 @@
+<my-hello>
+  <p>{ props.message }</p>
+  <p>1 + 5 = { 1 + 5 }</p>
+  <p>現在は{ new Date() }</p>
+  <p>{ props.message == 'Hello World!' ? 'Hello Riot.js' : 'Good Bye' }</p>
+  <p>今日の運勢は{ (num => ["小吉","中吉","大吉"][num])(Math.floor(Math.random() * 3)) }です</p>
+  <p>今日の運勢は{ omikuji(state.num) }です</p>
+  <p>{ state.num }</p>
+  <p>{ state.numzzz }</p>
+  <p>{ xx?.zzz }</p>
+  <p class="{ getMyColor() }">myColor</p>
+  <input type="checkbox" checked="{ state.mystatus }">
+
+  <p>{ state.num }</p>
+
+
+  <input type="button" onclick="{ reomikuji }" value="もう一回！" disabled="{ state.no_onechance }">
+
+  <p>\{ }を表示するには\\{}のように先頭の括弧をエスケープします</p>
+  <p if="{ state.num == 2 }">大吉だったんだね！おめでとう！</p>
+
+  <template if="{ state.num == 2 }">
+    <p>大吉だったんだね！おめでとう！</p>
+    <img src="happy.png">
+  </template>
+
+  <table border>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ item in state.item_list }">
+        <td>{ item.name }</td>
+        <td>{ item.price }</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table border>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ (item, index) in state.item_list }">
+        <td>{ index + 1 }</td>
+        <td>{ item.name }</td>
+        <td>{ item.price }</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table border>
+    <thead>
+      <tr>
+        <th>Name keys</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ key in Object.keys(state.item_list2) }">
+        <td>{ key }</td>
+        <td>{ state.item_list2[key] }</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table border>
+    <thead>
+      <tr>
+        <th>Name entries</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ item in Object.entries(state.item_list2) }">
+        <td>{ item[0] }</td>
+        <td>{ item[1] }</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <table border>
+    <thead>
+      <tr>
+        <th>Name entries</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ item in state.item_list3 }">
+        <td>{ item.name }</td>
+        <td>{ item.price }</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table border>
+    <thead>
+      <tr>
+        <th>Name set</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ item in state.item_list4 }">
+        <td>{ item.name }</td>
+        <td>{ item.price }</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table border>
+    <thead>
+      <tr>
+        <th>Name map</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ item in state.item_list5 }">
+        <td>{ item[0] }</td>
+        <td>{ item[1] }</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table border>
+    <thead>
+      <tr>
+        <th>Name gene</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each="{ item in state.item_list6() }">
+        <td>{ item.name }</td>
+        <td>{ item.price }</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <dl each="{ item in state.item_list }">
+    <dt>{ item.name }</dt>
+    <dd>{ item.price }</dd>
+  </dl>
+
+  <dl>
+    <template each="{ item in state.item_list }">
+      <dt>{ item.name }</dt>
+      <dd>{ item.price }</dd>
+    </template>
+    <dt>grape</dt>
+    <dd>300</dd>
+  </dl>
+
+  <select>
+    <option { ...list } each="{ list in state.myList }">{ list.name }</option>
+  </select>
+
+  <select>
+    <option name="{ list.name }" value="{ list.value }" selected="{ list.selected }" each="{ list in state.myList }">{ list.name }</option>
+  </select>
+
+  <style>
+    .myred {
+      color: red;
+    }
+  </style>
+
+  <script>
+    export default {
+      state: {
+        "num": Math.floor(Math.random() * 3),
+        "no_onechance": false,
+        "mystatus": false,
+        "item_list": [
+          {
+            "name": "orange",
+            "price": 120
+          },
+          {
+            "name": "apple",
+            "price": 220
+          },
+          {
+            "name": "banana",
+            "price": 80
+          }
+        ],
+        "item_list2": {
+          "orange": 120,
+          "apple": 220,
+          "banana": 80
+        },
+        "item_list3": {
+          "0": { "name": "orange", "price": 120 },
+          "1": { "name": "apple", "price": 220 },
+          "2": { "name": "banana", "price": 80 },
+          "length": 3
+        },
+        "item_list4": new Set([
+          { "name": "orange", "price": 120 },
+          { "name": "apple", "price": 220 },
+          { "name": "banana", "price": 80 }
+        ]),
+        "item_list5": new Map([
+          ["orange", 120 ],
+          ["apple", 220 ],
+          ["banana", 80 ]
+        ]),
+        "item_list6": function*() {
+          yield { "name": "orange", "price": 120 };
+          yield { "name": "apple", "price": 220 };
+          yield { "name": "banana", "price": 80 };
+        },
+        "myList": [
+          { "name": "orange", "value": "120", "selected": false },
+          { "name": "apple", "value": "220", "selected": true },
+          { "name": "banana", "value": "80", "selected": false }
+        ]
+      },
+
+      omikuji(num) {
+        return ["小吉","中吉","大吉"][num];
+      },
+
+      reomikuji() {
+        this.state.num = Math.floor(Math.random() * 3);
+        this.update();
+      },
+
+      getMyColor() {
+        return "myred";
+      },
+
+      onBeforeMount(props, state) {
+        console.log("マウント前");
+      },
+      onMounted(props, state) {
+        console.log("マウント後");
+      },
+
+      onBeforeUpdate(props, state) {
+        console.log("Update前");
+      },
+      onUpdated(props, state) {
+        console.log("update後");
+      },
+
+      onBeforeUnmount(props, state) {
+        console.log("アンマウント前");
+      },
+      onUnmounted(props, state) {
+        console.log("アンマウント後");
+      }
+    }
+  </script>
+</my-hello>

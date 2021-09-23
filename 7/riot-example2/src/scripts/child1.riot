@@ -1,0 +1,17 @@
+<my-child1>
+  <div>
+    I am child 1: { state.child }
+  </div>
+
+  <script>
+    export default {
+      state: {
+        "child": 456,
+      },
+
+      child_function() {
+        return state.child;
+      }
+    }
+  </script>
+</my-child1>

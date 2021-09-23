@@ -1,0 +1,30 @@
+<my-app>
+  <p>{ state.message } World!!</p>
+  <span each="{ button in state.buttons }">
+    <input type="button" value="{ button }" onclick="{ greeting }">
+  </span>
+  <script>
+    export default {
+      state : {
+        message : "",
+        buttons : [
+          "Hello",
+          "Goodbye",
+          "Hola",
+          "Adios"
+        ]
+      },
+
+      onMounted(props, state) {
+        state.message = "The";
+        this.update();
+      },
+
+      greeting(e) {
+        // クライアントサイドでは動作しません
+        this.state.message = e.target.value;
+        this.update();
+      },
+    }
+  </script>
+</my-app>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Riot Hello Wolrd</title>
+    <script src="./my-hello.riot" type="riot"></script>
+    <script src="https://cdn.jsdelivr.net/npm/riot@6.0.4/riot+compiler.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", async e => {
+        // テンプレート定義を読み込み、コンパイル
+        await riot.compile();
+
+        // カスタムタグにマウント
+        //   1: マウントするカスタムタグ名
+        //   2: タグに渡すオブジェクト(props)
+        riot.mount("my-hello", {
+          message: "Hello World!"
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <template id="my-hello">
+      <my-hello>
+        <p>{ props.message }</p>
+      </my-hello>
+    </template>
+
+    <my-hello></my-hello>
+  </body>
+</html>

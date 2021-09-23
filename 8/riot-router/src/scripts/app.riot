@@ -1,0 +1,21 @@
+<my-app>
+  <my-router>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/hello">Hello</a></li>
+        <li><a href="/goodbye">Goodbye</a></li>
+      </ul>
+    </nav>
+
+    <my-route path="/">
+      Welcome to home
+    </my-route>
+    <my-route path="/hello">
+      <my-hello></my-hello>
+    </my-route>
+    <my-route path="/goodbye">
+      <my-goodbye></my-goodbye>
+    </my-route>
+  </my-router>
+</my-app>

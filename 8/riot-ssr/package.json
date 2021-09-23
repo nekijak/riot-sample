@@ -1,0 +1,25 @@
+{
+  "name": "riotv6-ssr-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --ext js,riot --exec babel-node src/scripts/index.js"
+  },
+  "keywords": [],
+  "author": "KAJIKEN <kentaro@kajiken.jp> (http://kajiken.jp)",
+  "license": "MIT",
+  "dependencies": {
+    "@riotjs/compiler": "6.0.4",
+    "@riotjs/ssr": "^7.1.1",
+    "@riotjs/hydrate": "^6.0.0",
+    "express": "^4.17.1",
+    "riot": "^6.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "nodemon": "^2.0.12"
+  }
+}
